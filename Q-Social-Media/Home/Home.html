@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Queue | Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="screen">
+        <div class="phone-screen">
+            <div class="posts">
+                <div class="post">
+                    <img class="post-pfp-img" src="file:///C:/Users/hampu/Downloads/mouse.jpg">
+                    <p class="user-name-p" onclick=GoToProfile(this.textContent)>@Mankey</p>
+                    <img class="post-img" src="file:///C:/Users/hampu/Pictures/Screenshots/Sk%C3%A4rmbild%202023-03-05%20195438.png">
+                    <p class="post-caption">adw afiawgm waoipgnasknf wiakgfnwa giknsagn iwknga</p>
+                </div>
+                <div class="could-not-get-posts-div invisible" id="could-not-get-posts-div">
+                    <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.0//EN'  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'><svg class="error-symbol-svg" height="32" style="overflow:visible;enable-background:new 0 0 32 32" viewBox="0 0 32 32" width="32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g id="Incorrect_Symbol_1_"><g id="Incorrect_Symbol"><circle cx="16" cy="16" id="BG" r="16" style="fill:#4b4b4b;"/><polygon id="Cross_x5F_Symbol" points="24,10.1 21.9,8 16,13.9 10.1,8 8,10.1         13.9,16 8,21.9 10.1,24 16,18.1 21.9,24 24,21.9 18.1,16 " style="fill:#E6E6E6;"/></g></g></g></svg>
+                    <p class="error-msg-p">Could Not Recieve Posts!</p>
+                </div>
+            </div>
+            <div class="menu-bar">
+                <p class="menu-bar-element menu-bar-element-current-page">Home</p>
+                <p class="menu-bar-element">Profile</p>
+                <p class="menu-bar-element add-post-b" onclick=AddPost()>+</p>
+                <p class="menu-bar-element">Profile</p>
+                <p class="menu-bar-element">Profile</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Queue | Add Post</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="screen">
+        <div class="phone-screen">
+            <div class="menu-bar">
+                <p class="menu-bar-element" onclick=GoBack()><</p>
+            </div>
+            <div class="go-back-div invisible" id="go-back-div">
+                <p class="go-back-div-p">Are You Sure You Want To Continue, Your Post Won't Be Sent?</p>
+                <button class="go-back-div-b go-back-div-b-yes" onclick=GoBackYes()>Yes</button>
+                <button class="go-back-div-b go-back-div-b-no" onclick=GoBackNo()>No</button>
+            </div>
+            <div class="part1 invisible" id="part1">
+                <svg aria-label="Icon to represent media as images or videos" class="upload-icon" id="upload-icon" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="77" role="img" viewBox="0 0 97.6 77.3" width="96"><title>Ikon för att representera media som bilder eller videor</title><path d="M16.3 24h.3c2.8-.2 4.9-2.6 4.8-5.4-.2-2.8-2.6-4.9-5.4-4.8s-4.9 2.6-4.8 5.4c.1 2.7 2.4 4.8 5.1 4.8zm-2.4-7.2c.5-.6 1.3-1 2.1-1h.2c1.7 0 3.1 1.4 3.1 3.1 0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-.8.3-1.5.8-2.1z" fill="currentColor"></path><path d="M84.7 18.4 58 16.9l-.2-3c-.3-5.7-5.2-10.1-11-9.8L12.9 6c-5.7.3-10.1 5.3-9.8 11L5 51v.8c.7 5.2 5.1 9.1 10.3 9.1h.6l21.7-1.2v.6c-.3 5.7 4 10.7 9.8 11l34 2h.6c5.5 0 10.1-4.3 10.4-9.8l2-34c.4-5.8-4-10.7-9.7-11.1zM7.2 10.8C8.7 9.1 10.8 8.1 13 8l34-1.9c4.6-.3 8.6 3.3 8.9 7.9l.2 2.8-5.3-.3c-5.7-.3-10.7 4-11 9.8l-.6 9.5-9.5 10.7c-.2.3-.6.4-1 .5-.4 0-.7-.1-1-.4l-7.8-7c-1.4-1.3-3.5-1.1-4.8.3L7 49 5.2 17c-.2-2.3.6-4.5 2-6.2zm8.7 48c-4.3.2-8.1-2.8-8.8-7.1l9.4-10.5c.2-.3.6-.4 1-.5.4 0 .7.1 1 .4l7.8 7c.7.6 1.6.9 2.5.9.9 0 1.7-.5 2.3-1.1l7.8-8.8-1.1 18.6-21.9 1.1zm76.5-29.5-2 34c-.3 4.6-4.3 8.2-8.9 7.9l-34-2c-4.6-.3-8.2-4.3-7.9-8.9l2-34c.3-4.4 3.9-7.9 8.4-7.9h.5l34 2c4.7.3 8.2 4.3 7.9 8.9z" fill="currentColor"></path><path d="M78.2 41.6 61.3 30.5c-2.1-1.4-4.9-.8-6.2 1.3-.4.7-.7 1.4-.7 2.2l-1.2 20.1c-.1 2.5 1.7 4.6 4.2 4.8h.3c.7 0 1.4-.2 2-.5l18-9c2.2-1.1 3.1-3.8 2-6-.4-.7-.9-1.3-1.5-1.8zm-1.4 6-18 9c-.4.2-.8.3-1.3.3-.4 0-.9-.2-1.2-.4-.7-.5-1.2-1.3-1.1-2.2l1.2-20.1c.1-.9.6-1.7 1.4-2.1.8-.4 1.7-.3 2.5.1L77 43.3c1.2.8 1.5 2.3.7 3.4-.2.4-.5.7-.9.9z" fill="currentColor"></path></svg>
+                <input class="pick-file" tabindex="-1" type="file" id="pick-file" accept="image/png, image/jpeg" alt="Upload Image" onchange=UploadFile()>
+                <img class="upload-image invisible" id="upload-image" src="">
+                <p class="upload-image-p" id="upload-image-p">Upload Image</p>
+                <button class="next-b invisible" id="next-b" onclick=NextPart()>Next ></button>
+                <p class="error-msg" id="error-msg1">Lowest Resolution: 150x150</p>
+                <p class="error-msg" id="error-msg2">The Image Is Too Big Or Small On Either Side!</p>
+                <div class="icon-holder icon-holder1 invisible" id="icon-holder1">
+                    <svg class="change-img-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" version="1.1" id="Capa_1" width="800px" height="800px" viewBox="0 0 494.936 494.936" xml:space="preserve"><g><g><path d="M389.844,182.85c-6.743,0-12.21,5.467-12.21,12.21v222.968c0,23.562-19.174,42.735-42.736,42.735H67.157    c-23.562,0-42.736-19.174-42.736-42.735V150.285c0-23.562,19.174-42.735,42.736-42.735h267.741c6.743,0,12.21-5.467,12.21-12.21    s-5.467-12.21-12.21-12.21H67.157C30.126,83.13,0,113.255,0,150.285v267.743c0,37.029,30.126,67.155,67.157,67.155h267.741    c37.03,0,67.156-30.126,67.156-67.155V195.061C402.054,188.318,396.587,182.85,389.844,182.85z"/><path d="M483.876,20.791c-14.72-14.72-38.669-14.714-53.377,0L221.352,229.944c-0.28,0.28-3.434,3.559-4.251,5.396l-28.963,65.069    c-2.057,4.619-1.056,10.027,2.521,13.6c2.337,2.336,5.461,3.576,8.639,3.576c1.675,0,3.362-0.346,4.96-1.057l65.07-28.963    c1.83-0.815,5.114-3.97,5.396-4.25L483.876,74.169c7.131-7.131,11.06-16.61,11.06-26.692    C494.936,37.396,491.007,27.915,483.876,20.791z M466.61,56.897L257.457,266.05c-0.035,0.036-0.055,0.078-0.089,0.107    l-33.989,15.131L238.51,247.3c0.03-0.036,0.071-0.055,0.107-0.09L447.765,38.058c5.038-5.039,13.819-5.033,18.846,0.005    c2.518,2.51,3.905,5.855,3.905,9.414C470.516,51.036,469.127,54.38,466.61,56.897z"/></g></g></svg>
+                </div>
+                <div class="icon-holder icon-holder2 invisible" id="icon-holder2" onclick=RemoveImg()>
+                    <svg class="remove-img-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg>
+                </div>
+            </div>
+            <div class="part2" id="part2">
+                <textarea class="caption-i" maxlength="50" id="caption-i" spellcheck="false" placeholder="Caption..." oninput=UpdateLetters()></textarea>
+                <textarea class="img-url-i" spellcheck="false" id="img-url-i" placeholder="Image URL"></textarea>
+                <p class="wordcount-p" id="wordcount-p">0/50</p>
+                <button class="post-b post-b-disabled" id="post-b" onclick=Post()>Post</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    uploadImage = function(source) {
+        
+            width = 0;
+            height = 0;
+
+            url = URL.createObjectURL(source);
+            getMeta(url, (err, img) => {
+                //console.log(img.naturalWidth, img.naturalHeight);
+                width = img.naturalWidth;
+                height = img.naturalHeight;
+                if(width >= 150 && height >= 150) {
+                    if(width >= height*2 || height >= width*1.5) {
+                        document.getElementById('error-msg1').classList.remove('show-error-msg');
+                        document.getElementById('error-msg2').classList.add('show-error-msg');
+                        return;
+                    } 
+                    document.getElementById('upload-image').src = url;
+                    document.getElementById('pick-file').classList.add('pick-file-change-icon');
+                    document.getElementById('next-b').classList.remove('invisible');
+                    document.getElementById('upload-image').classList.remove('invisible');
+                    document.getElementById('upload-icon').classList.add('invisible');
+                    document.getElementById('upload-image-p').classList.add('invisible');
+                    document.getElementById('icon-holder1').classList.remove('invisible');
+                    document.getElementById('icon-holder2').classList.remove('invisible');
+                    document.getElementById('error-msg1').classList.remove('show-error-msg');
+                    document.getElementById('error-msg2').classList.remove('show-error-msg');
+                } else {
+                    document.getElementById('error-msg2').classList.remove('show-error-msg');
+                    document.getElementById('error-msg1').classList.add('show-error-msg');
+                }
+            });
+    }
+    
+    const getMeta = (url, cb) => {
+        const img = new Image();
+        img.onload = () => cb(null, img);
+        img.onerror = (err) => cb(err);
+        img.src = url;
+    };
+
+    const input = document.querySelector('.pick-file');
+    input.addEventListener("change", () => {
+        const file = input.files;
+        uploadImage(input.files[0]);
+    });
+
+    input.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const files = e.dataTransfer.files;
+        if(files[0].type.toString().startsWith('image')) {
+            uploadImage(files[0]);
+        }
+    });
+</script>

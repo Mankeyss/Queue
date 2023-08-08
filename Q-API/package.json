@@ -1,0 +1,16 @@
+{
+  "name": "q-api",
+  "version": "1.0.0",
+  "description": "An Api Created For Queue (A Social Media Platform)",
+  "main": "API.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mankey",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

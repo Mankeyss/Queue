@@ -1,0 +1,2 @@
+1. Retrieve url for image, check it's validity, then store it.
+2. When requested, the platform should be able to recieve a random post, but before check the validity again for the url

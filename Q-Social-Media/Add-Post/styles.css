@@ -1,0 +1,347 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.screen {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-screen {
+    position: absolute;
+    height: 844px;
+    width: 390px;
+    background-color: rgb(54, 54, 54);
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.menu-bar {
+    position: absolute;
+    background-color: black;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    z-index: 3;
+}
+
+.menu-bar-element {
+    color: white;
+    margin-left: 35px;
+    margin-right: 20px;
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 30px;
+}
+
+.part1 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: rgb(54, 54, 54);
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.title-text-ta {
+    resize: none;
+    height: 50px;
+    width: 250px;
+    margin-bottom: 450px;
+}
+
+.pick-file {
+    color: rgb(54, 54, 54);
+    width: 0px;
+    padding-left: 250px;
+    height: 0px;
+    padding-bottom: 700px;
+    z-index: 1;
+}
+:focus {
+    outline: none;
+}
+
+.upload-icon {
+    position: absolute;
+    z-index: 0;
+    height: 150px;
+    width: 150px;
+}
+
+.upload-image {
+    max-height: 300px;
+    max-width: 300px;
+    position: absolute;
+    z-index: 2;
+    object-fit: scale-down;
+    min-height: 0px;
+    min-width: 0px;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.next-b {
+    position: absolute;
+    margin-bottom: -400px;
+    background-color: rgb(0, 143, 199);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100px;
+    height: 40px;
+    font-size: 25px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.go-back-div {
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    z-index: 5;
+    background-color: black;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.go-back-div-b {
+    position: absolute;
+    width: 125px;
+    color: white;
+    background-color: rgb(44, 44, 44);
+    border: none;
+    line-height: 0;
+    height: 125px;
+    margin-top: 125px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.go-back-div-b:hover {
+    background-color: rgb(70, 70, 70);
+}
+
+.go-back-div-b:active {
+    background-color: rgb(100, 100, 100);
+}
+
+.go-back-div-b-yes {
+    margin-right: 125px;
+}
+
+.go-back-div-b-no {
+    margin-left: 125px;
+}
+
+.go-back-div-p {
+    color: white;
+    text-align: center;
+    margin-bottom: 125px;
+}
+
+.upload-image-p {
+    position: absolute;
+    color: white;
+    padding: 0;
+    margin: 0;
+    margin-top: 180px;
+    font-size: 24px;
+}
+
+.error-msg {
+    position: absolute;
+    color: rgba(255, 255, 255, 0);
+    background-color: rgb(160, 0, 0, 0);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    margin-top: -770px;
+    visibility: hidden;
+    z-index: 5;
+}
+
+.show-error-msg {
+    transition: color 0.3s, background-color 0.3s, margin-top 0.3s;
+    margin-top: -670px;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgb(160, 0, 0, 1);
+    visibility: visible;
+}
+
+.part2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(54, 54, 54);
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.img-url-i {
+    resize: none;
+    position: absolute;
+    width: 360px;
+    height: 35px;
+    max-height: 35px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 120px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
+
+.caption-i {
+    resize: none;
+    width: 290px;
+    height: 50px;
+    max-height: 50px;
+    padding-right: 80px;
+    font-size: 15px;
+    background-color: black;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+:focus {
+    outline: none;
+}
+
+.wordcount-p {
+    position: absolute;
+    color: white;
+    text-align: right;
+    left: 0;
+    right: 0;
+    padding-right: 15px;
+    pointer-events: none;
+}
+
+.post-b {
+    position: absolute;
+    margin-top: 110px;
+    margin-right: 300px;
+    width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(0, 143, 199);
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 0;
+}
+
+.post-b-disabled {
+    background-color: rgb(0, 96, 134);
+    color: rgb(160, 160, 160);
+    cursor: default;
+}
+
+.icon-holder {
+    background-color: rgba(128, 128, 128, 0.5);
+    height: 100px;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 100px;
+    z-index: 10;
+    position: absolute;
+    cursor: pointer;
+}
+
+.icon-holder:hover {
+    background-color: rgba(128, 128, 128, 1);
+}
+
+.icon-holder1 {
+    margin-right: 125px;
+}
+
+.icon-holder2 {
+    margin-left: 125px;
+}
+
+.change-img-icon {
+    color: white;
+    height: 50px;
+    width: 50px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.remove-img-icon {
+    width: 45px;
+    height: 45px;
+    color: white;
+}
+
+.pick-file-change-icon {
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    border-radius: 100px;
+    z-index: 11;
+    margin: 0;
+    padding: 0;
+    margin-right: 125px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    font-size: 0px;
+    cursor: pointer;
+}
+
+.pick-file-change-icon:hover ~ .icon-holder1 {
+    background-color: rgba(128, 128, 128, 1);
+}
+
+.pick-file-change-icon::-webkit-file-upload-button {
+    display: none;
+}
+
