@@ -2,7 +2,7 @@
 This Is Just A Sample Social Media Platform To Showcase How They Are Built Up In The Real World, But This One Is Not Secure At All Keep That In Mind If You're Trying To Host It Globally.
 
 ## How To Set It Up
-Assuming You've Already Got [Visual Studio Code](https://code.visualstudio.com/) Installed On Your System, The First Thing To Do Is Downloading The Required Files To Your System.
+* Assuming You've Already Got [Visual Studio Code](https://code.visualstudio.com/) Installed On Your System, The First Thing To Do Is Downloading The Required Files To Your System.
 To Do This All You Need To Do Is To [Click Here](https://github.com/Mankeyss/Queue/archive/refs/heads/main.zip).
 Now Open File Explorer, Extract The Downloaded Folder And Open It. Then Were You Can Find The Path To The Folder, Remove All Text And Write ```cmd```, Once The Command Prompt Has Opened, Enter ```code .```In To Your Prompt.
 Now Visual Studio Code Should Open The Folder As The Workspace. Then Install The [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) Extension To Visual Studio Code, Now Assuming You Have The Latest Version Of [Node.Js](https://nodejs.org/en/download)
