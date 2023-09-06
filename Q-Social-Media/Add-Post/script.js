@@ -1,5 +1,5 @@
 GoBack = function() {
-    if(window.location.toString().includes('?oldloc=') && !document.getElementById('part1').classList.contains('invisible')) {
+    if(window.location.toString().includes('?oldloc=') /*&& !document.getElementById('part1').classList.contains('invisible')*/) {
         AskToGoBack();
     } else if(document.getElementById('part1').classList.contains('invisible')) {
         document.getElementById('part1').classList.remove('invisible');
@@ -8,7 +8,7 @@ GoBack = function() {
 }
 
 AskToGoBack = function() {
-    document.getElementById('part1').classList.add('invisible');
+    document.getElementById('part2' /*part1*/).classList.add('invisible');
     document.getElementById('go-back-div').classList.remove('invisible');
 }
 
@@ -17,7 +17,7 @@ GoBackYes = function() {
 }
 
 GoBackNo = function() {
-    document.getElementById('part1').classList.remove('invisible');
+    document.getElementById('part2' /*part1*/).classList.remove('invisible');
     document.getElementById('go-back-div').classList.add('invisible');
 }
 
@@ -42,7 +42,7 @@ UpdateLetters = function() {
 }
 
 async function Post() {
-    if(document.getElementById('caption-i').value.toString().trim().length >= 5) {
+    if(document.getElementById('caption-i').value.toString().trim().length >= 5 && document.getElementById('img-url-i').value.toString().trim().length > 0) {
         //Post
         //Image
         //&
@@ -50,13 +50,26 @@ async function Post() {
         //Caption: document.getElementById('caption-i').value.toString().trim()
         document.getElementById('post-b').classList.add('post-b-disabled');
 
+        const username = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("name="))
+        ?.split("=")[1];
+
         let request = new XMLHttpRequest();
-        request.open("GET", `http://127.0.0.1:5020/addpost?caption=${document.getElementById('caption-i').value.toString().trim()};?imgurl=${document.getElementById('img-url-i').value}`);
+        request.open("GET", `http://127.0.0.1:48922/addpost?caption=${document.getElementById('caption-i').value.toString().trim()};?imgurl=${document.getElementById('img-url-i').value};?user=${username}`);
         request.send();
         request.onload = () => {
             console.log(request.response);
+            window.location = '.././Home/Home.html'
+            window.reload();
         }
-    }
+    } else if(document.getElementById('img-url-i').value.toString().trim().length <= 0) {
+        document.getElementById('error-msg-p2').classList.add('show-error-msg');
+        document.getElementById('error-msg-p2').textContent = 'No Image Url Given!';
+    } else if(document.getElementById('caption-i').value.toString().trim().length < 5) {
+        document.getElementById('error-msg-p2').classList.add('show-error-msg');
+        document.getElementById('error-msg-p2').textContent = 'Characters In Caption Must Be At Least 5!';
+    };
 }
 
 RemoveImg = function() {

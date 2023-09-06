@@ -3,12 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
     <title>Queue | Sign Up</title>
     <script src="script.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <input placeholder="username-input" id="username-input" type="text">
-    <input placeholder="password-input" id="password-input" type="password">
-    <button onclick="CreateAccount()">Create Account</button>
+    <div class="screen">
+        <div class="phone-screen">
+            <div class="loader" id="loader"></div>
+            <div class="could-not-get-posts-div" id="could-not-get-posts-div">
+                <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.0//EN'  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'><svg class="error-symbol-svg" height="32" style="overflow:visible;enable-background:new 0 0 32 32" viewBox="0 0 32 32" width="32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g id="Incorrect_Symbol_1_"><g id="Incorrect_Symbol"><circle cx="16" cy="16" id="BG" r="16" style="fill:#4b4b4b;"/><polygon id="Cross_x5F_Symbol" points="24,10.1 21.9,8 16,13.9 10.1,8 8,10.1         13.9,16 8,21.9 10.1,24 16,18.1 21.9,24 24,21.9 18.1,16 " style="fill:#E6E6E6;"/></g></g></g></svg>
+                <p class="error-msg-p">Could Not Connect!</p>
+            </div>
+            <p class="title-p">Sign Up</p>
+            <p class="error-msg" id="error-msg">Username Field Can't Be Empty!</p>
+            <input placeholder="Username..." maxlength="25" class="username-i info-i" id="username-input" spellcheck="false" type="text">
+            <input placeholder="Password..." class="password-i info-i" id="password-input" spellcheck="false" type="password">
+            <button class="create-account-b" onclick="CreateAccount()">Create Account</button>
+            <a href="../Login/Login.html" class="log-in-p">Already Got An Account? <span class="log-in-span">Log In!</span></a>
+        </div>
+    </div>
 </body>
 </html>

@@ -13,26 +13,156 @@
 <body>
     <div class="screen">
         <div class="phone-screen">
-            <div class="posts">
-                <div class="post">
-                    <img class="post-pfp-img" src="file:///C:/Users/hampu/Downloads/mouse.jpg">
-                    <p class="user-name-p" onclick=GoToProfile(this.textContent)>@Mankey</p>
-                    <img class="post-img" src="file:///C:/Users/hampu/Pictures/Screenshots/Sk%C3%A4rmbild%202023-03-05%20195438.png">
-                    <p class="post-caption">adw afiawgm waoipgnasknf wiakgfnwa giknsagn iwknga</p>
-                </div>
+            <div class="top-menu-bar">
+                <img class="top-menu-bar-logo" src="./Images/Logo.png" onclick="GoToGithub()">
+                <img class="top-menu-bar-pfp-img" id="top-menu-bar-pfp-img" src="./Images/user_icon.jpg" onclick="OpenAccountOptions()">
+            </div>
+            <div class="top-menu-bar-pfp-img-clicked-div invisible" id="top-menu-bar-pfp-img-clicked-div">
+                <p class="top-menu-bar-pfp-img-clicked-element username-clicked-p" id="username-clicked-p">@Mankey</p>
+                <p class="top-menu-bar-pfp-img-clicked-element">Other Stuff</p>
+                <p class="top-menu-bar-pfp-img-clicked-element" onclick="LogOut()">Log Out</p>
+            </div>
+            <div class="top-menu-bar-pfp-img-clicked-div-cover invisible" id="top-menu-bar-pfp-img-clicked-div-cover" onclick="CloseAccountOptions()" onscroll="CloseAccountOptions()"></div>
+            <div class="posts" id="posts">
                 <div class="could-not-get-posts-div invisible" id="could-not-get-posts-div">
                     <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.0//EN'  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'><svg class="error-symbol-svg" height="32" style="overflow:visible;enable-background:new 0 0 32 32" viewBox="0 0 32 32" width="32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g id="Incorrect_Symbol_1_"><g id="Incorrect_Symbol"><circle cx="16" cy="16" id="BG" r="16" style="fill:#4b4b4b;"/><polygon id="Cross_x5F_Symbol" points="24,10.1 21.9,8 16,13.9 10.1,8 8,10.1         13.9,16 8,21.9 10.1,24 16,18.1 21.9,24 24,21.9 18.1,16 " style="fill:#E6E6E6;"/></g></g></g></svg>
                     <p class="error-msg-p">Could Not Recieve Posts!</p>
                 </div>
+                <div class="could-not-find-any-posts-div could-not-get-posts-div invisible" id="could-not-find-any-posts-div">
+                    <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.0//EN'  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'><svg class="error-symbol-svg" height="32" style="overflow:visible;enable-background:new 0 0 32 32" viewBox="0 0 32 32" width="32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g id="Incorrect_Symbol_1_"><g id="Incorrect_Symbol"><circle cx="16" cy="16" id="BG" r="16" style="fill:#4b4b4b;"/><polygon id="Cross_x5F_Symbol" points="24,10.1 21.9,8 16,13.9 10.1,8 8,10.1         13.9,16 8,21.9 10.1,24 16,18.1 21.9,24 24,21.9 18.1,16 " style="fill:#E6E6E6;"/></g></g></g></svg>
+                    <p class="error-msg-p error-msg-no-posts-p">There Is No Posts Yet! Be The First One To Upload!</p>
+                </div>
             </div>
+            <div class="loader" id="loader"></div>
             <div class="menu-bar">
                 <p class="menu-bar-element menu-bar-element-current-page">Home</p>
                 <p class="menu-bar-element">Profile</p>
                 <p class="menu-bar-element add-post-b" onclick=AddPost()>+</p>
                 <p class="menu-bar-element">Profile</p>
-                <p class="menu-bar-element">Profile</p>
+                <a class="menu-bar-element" href="../Profile/Profile.html">Profile</a>
             </div>
         </div>
     </div>
 </body>
 </html>
+<script>
+//Get Liked Posts
+        let likedPosts = [];
+        try {
+            let request = new XMLHttpRequest();
+            request.open("GET", `http://127.0.0.1:48922/liked-posts?user=${user}`);
+            request.send();
+            request.onload = () => {
+                likedPosts = request.response;
+            }
+            request.onerror = () => {}
+        }
+        catch (e) {}
+    //Posts
+    var ableToRecievePosts = true;
+    var usedPosts = [];
+    //Request Posts
+    GetPost = function(num) {
+        if(num > 0 && ableToRecievePosts) {
+        try {
+            let request = new XMLHttpRequest();
+            request.open("GET", `http://127.0.0.1:48922/home-get-posts?used=${usedPosts}`);
+            request.send();
+            request.onload = () => {
+                document.getElementById('loader').classList.add('loader--hidden');
+                if(request.response != "Could't Find Any Available Posts!" && request.response != 'No Posts!' && request.response != 'Post Invalid!' && request.response != "Post Doesn't Exist Anymore!" && request.response != "Reached The End!") {
+    
+                    //Check Image Validity
+                    var imageUrl = JSON.parse(request.response)[2];
+                    try {
+                    fetch(imageUrl)
+                    .then(response => {
+                        if (response.ok) {
+                            document.getElementById('posts').innerHTML += `
+                            <div class="post" id="post-${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}">
+                                <img class="post-pfp-img" src="./Images/user_icon.jpg">
+                                <p class="display-name-p">${decodeURIComponent(JSON.parse(request.response)[4].toString().trim())}</p>
+                                <p class="user-name-p" onclick=GoToProfile(this.textContent)>@${decodeURIComponent(JSON.parse(request.response)[3])}</p>
+                                <img class="post-img" src="${JSON.parse(request.response)[2]}">
+                                <p class="post-caption">${decodeURIComponent(JSON.parse(request.response)[1].toString().trim())}</p>
+                                <div class="action-placeholder" id="action-post-${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}">
+                                    <svg aria-label="" id="action-post-button-${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}" onClick="ClickCommentIcon(this)" class="comment-icon" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><title></title><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+                                    <p class="heart-icon ${likedPosts.includes(decodeURIComponent(JSON.parse(request.response)[0].toString().trim())) ? "heart-icon-clicked" : ""}" id="${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}" onclick="ClickHeartIcon(this)">&#10084;</p>
+                                    <p class="comments-counter">233</p>
+                                    <p class="like-counter" id="like-${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}">${JSON.parse(request.response)[5]}</p>
+                                </div>
+                                <div class="comments-p-placeholder-div">
+                                    <p class="comments-p">Comments Aren't Added Yet!</p>
+                                </div>
+                            </div>`
+                            console.log('recieved!')
+                            usedPosts.push(Number(JSON.parse(request.response)[0]));
+                            GetPost(num-1);
+                        } else {
+                            console.log('Image URL is invalid');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error validating image URL:', error);
+                    });
+                    } catch (e) {}
+                    
+                } else if(request.response == 'No Posts!') {
+                    console.log('No Posts!');
+                    
+                        document.getElementById('could-not-get-posts-div').classList.add('invisible');
+                        document.getElementById('posts').innerHTML += `
+                        <div class="post end-div" id="end-div">
+                        <p class="post-caption no-more-posts-p">You've Reached The End!
+                            Nothing More To See Here!
+                        </p>
+                        </div>`
+                    ableToRecievePosts = false;
+                } else if(request.response == "Could't Find Any Available Posts!") {
+                    document.getElementById('could-not-find-any-posts-div').classList.remove('invisible');
+                } else if(request.response == "Couldn't Find ?used= Parameter!") {
+                    document.getElementById('could-not-get-posts-div').classList.remove('invisible');
+                }else {
+                    document.getElementById('could-not-get-posts-div').classList.remove('invisible');
+                }
+            }
+            request.onerror = () => {
+                document.getElementById('top-menu-bar-pfp-img').classList.add('invisible');
+                document.getElementById('could-not-get-posts-div').classList.remove('invisible');
+                document.getElementById('loader').classList.add('loader--hidden');
+            }
+        } catch (e) {
+            document.getElementById('top-menu-bar-pfp-img').classList.add('invisible');
+            document.getElementById('could-not-get-posts-div').classList.remove('invisible');
+        }
+    }
+    }
+    
+    GetPost(3);
+    //Top Menu Bar
+    const username = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("name="))
+        ?.split("=")[1];
+
+        try {
+            if(username.length > 0) {
+                document.getElementById('username-clicked-p').textContent = `@${decodeURIComponent(username).toLowerCase()}`;
+            } else {
+                window.location = '../LoginSignup/Signup/Signup.html';
+            }
+        } catch(e) {
+            window.location = '../LoginSignup/Signup/Signup.html';
+        }
+
+    const posts = document.querySelector('.posts');
+    if(!posts) {
+        console.log('A');
+    }
+    posts.addEventListener('scroll', function(e) {
+      if(posts.scrollHeight - posts.clientHeight <= posts.scrollTop) {
+        //Get More Posts
+        GetPost(15);
+      }
+    })
+</script>

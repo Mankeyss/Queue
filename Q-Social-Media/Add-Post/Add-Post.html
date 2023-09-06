@@ -21,7 +21,12 @@
                 <button class="go-back-div-b go-back-div-b-yes" onclick=GoBackYes()>Yes</button>
                 <button class="go-back-div-b go-back-div-b-no" onclick=GoBackNo()>No</button>
             </div>
-            <div class="part1 invisible" id="part1">
+            <div class="loader" id="loader"></div>
+            <div class="could-not-get-posts-div" id="could-not-get-posts-div">
+                <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.0//EN'  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'><svg class="error-symbol-svg" height="32" style="overflow:visible;enable-background:new 0 0 32 32" viewBox="0 0 32 32" width="32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g id="Incorrect_Symbol_1_"><g id="Incorrect_Symbol"><circle cx="16" cy="16" id="BG" r="16" style="fill:#4b4b4b;"/><polygon id="Cross_x5F_Symbol" points="24,10.1 21.9,8 16,13.9 10.1,8 8,10.1         13.9,16 8,21.9 10.1,24 16,18.1 21.9,24 24,21.9 18.1,16 " style="fill:#E6E6E6;"/></g></g></g></svg>
+                <p class="error-msg-p">Could Not Connect!</p>
+            </div>
+            <!--<div class="part1 invisible" id="part1">
                 <svg aria-label="Icon to represent media as images or videos" class="upload-icon" id="upload-icon" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="77" role="img" viewBox="0 0 97.6 77.3" width="96"><title>Ikon för att representera media som bilder eller videor</title><path d="M16.3 24h.3c2.8-.2 4.9-2.6 4.8-5.4-.2-2.8-2.6-4.9-5.4-4.8s-4.9 2.6-4.8 5.4c.1 2.7 2.4 4.8 5.1 4.8zm-2.4-7.2c.5-.6 1.3-1 2.1-1h.2c1.7 0 3.1 1.4 3.1 3.1 0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-.8.3-1.5.8-2.1z" fill="currentColor"></path><path d="M84.7 18.4 58 16.9l-.2-3c-.3-5.7-5.2-10.1-11-9.8L12.9 6c-5.7.3-10.1 5.3-9.8 11L5 51v.8c.7 5.2 5.1 9.1 10.3 9.1h.6l21.7-1.2v.6c-.3 5.7 4 10.7 9.8 11l34 2h.6c5.5 0 10.1-4.3 10.4-9.8l2-34c.4-5.8-4-10.7-9.7-11.1zM7.2 10.8C8.7 9.1 10.8 8.1 13 8l34-1.9c4.6-.3 8.6 3.3 8.9 7.9l.2 2.8-5.3-.3c-5.7-.3-10.7 4-11 9.8l-.6 9.5-9.5 10.7c-.2.3-.6.4-1 .5-.4 0-.7-.1-1-.4l-7.8-7c-1.4-1.3-3.5-1.1-4.8.3L7 49 5.2 17c-.2-2.3.6-4.5 2-6.2zm8.7 48c-4.3.2-8.1-2.8-8.8-7.1l9.4-10.5c.2-.3.6-.4 1-.5.4 0 .7.1 1 .4l7.8 7c.7.6 1.6.9 2.5.9.9 0 1.7-.5 2.3-1.1l7.8-8.8-1.1 18.6-21.9 1.1zm76.5-29.5-2 34c-.3 4.6-4.3 8.2-8.9 7.9l-34-2c-4.6-.3-8.2-4.3-7.9-8.9l2-34c.3-4.4 3.9-7.9 8.4-7.9h.5l34 2c4.7.3 8.2 4.3 7.9 8.9z" fill="currentColor"></path><path d="M78.2 41.6 61.3 30.5c-2.1-1.4-4.9-.8-6.2 1.3-.4.7-.7 1.4-.7 2.2l-1.2 20.1c-.1 2.5 1.7 4.6 4.2 4.8h.3c.7 0 1.4-.2 2-.5l18-9c2.2-1.1 3.1-3.8 2-6-.4-.7-.9-1.3-1.5-1.8zm-1.4 6-18 9c-.4.2-.8.3-1.3.3-.4 0-.9-.2-1.2-.4-.7-.5-1.2-1.3-1.1-2.2l1.2-20.1c.1-.9.6-1.7 1.4-2.1.8-.4 1.7-.3 2.5.1L77 43.3c1.2.8 1.5 2.3.7 3.4-.2.4-.5.7-.9.9z" fill="currentColor"></path></svg>
                 <input class="pick-file" tabindex="-1" type="file" id="pick-file" accept="image/png, image/jpeg" alt="Upload Image" onchange=UploadFile()>
                 <img class="upload-image invisible" id="upload-image" src="">
@@ -35,19 +40,45 @@
                 <div class="icon-holder icon-holder2 invisible" id="icon-holder2" onclick=RemoveImg()>
                     <svg class="remove-img-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg>
                 </div>
-            </div>
+            </div>-->
             <div class="part2" id="part2">
+                <p class="text-notification-p">Sadly, Since This Isn't Hosted On A Server, You'll Have To Input A Link, If You Don't Know Where To Do That You Can Do It<br><a class="upload-image-url-b" href="https://imgbb.com/" target="_blank" onclick="">Here</a></p>
+                <div class="error-msg" id="error-msg-p2">Error!</div>
                 <textarea class="caption-i" maxlength="50" id="caption-i" spellcheck="false" placeholder="Caption..." oninput=UpdateLetters()></textarea>
                 <textarea class="img-url-i" spellcheck="false" id="img-url-i" placeholder="Image URL"></textarea>
                 <p class="wordcount-p" id="wordcount-p">0/50</p>
-                <button class="post-b post-b-disabled" id="post-b" onclick=Post()>Post</button>
+                <button tabindex="-1" class="post-b post-b-disabled" id="post-b" onclick=Post()>Post</button>
             </div>
         </div>
     </div>
 </body>
 </html>
 <script>
+    
+    const user = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("name="))
+        ?.split("=")[1];
+        if(user.length <= 0) {
+            window.location = '../LoginSignup/Signup/Signup.html'
+        }
 
+    try {
+    let request = new XMLHttpRequest();
+        request.open("GET", `http://127.0.0.1:48922/status`);
+        request.send();
+        request.onload = () => {
+            document.getElementById('could-not-get-posts-div').classList.add('invisible');
+            document.getElementById('loader').classList.add('loader--hidden');
+        }
+        request.onerror = () => {
+            document.getElementById('loader').classList.add('loader--hidden');
+        }
+    } catch (e) {
+        document.getElementById('loader').classList.add('loader--hidden');
+    }
+
+    //For Part 1
     uploadImage = function(source) {
         
             width = 0;
@@ -88,17 +119,22 @@
         img.src = url;
     };
 
-    const input = document.querySelector('.pick-file');
-    input.addEventListener("change", () => {
-        const file = input.files;
-        uploadImage(input.files[0]);
-    });
+    try {
+        const input = document.querySelector('.pick-file');
+        input.addEventListener("change", () => {
+            const file = input.files;
+            uploadImage(input.files[0]);
+        });
 
-    input.addEventListener("drop", (e) => {
+        input.addEventListener("drop", (e) => {
         e.preventDefault();
         const files = e.dataTransfer.files;
         if(files[0].type.toString().startsWith('image')) {
             uploadImage(files[0]);
         }
-    });
+        });
+    } catch (e) {}
+
+
+
 </script>

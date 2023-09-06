@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Queue | Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="screen">
+        <div class="phone-screen">
+            <div class="loader" id="loader"></div>
+            <div class="could-not-get-posts-div invisible" id="could-not-get-posts-div">
+                <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.0//EN'  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'><svg class="error-symbol-svg" height="32" style="overflow:visible;enable-background:new 0 0 32 32" viewBox="0 0 32 32" width="32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g id="Incorrect_Symbol_1_"><g id="Incorrect_Symbol"><circle cx="16" cy="16" id="BG" r="16" style="fill:#4b4b4b;"/><polygon id="Cross_x5F_Symbol" points="24,10.1 21.9,8 16,13.9 10.1,8 8,10.1         13.9,16 8,21.9 10.1,24 16,18.1 21.9,24 24,21.9 18.1,16 " style="fill:#E6E6E6;"/></g></g></g></svg>
+                <p class="error-msg-p">Could Not Connect To Server!</p>
+            </div>
+            <div class="user-preview-div" id="user-preview-div">
+                <img class="user-pfp-img" src="../Home/Images/user_icon.jpg">
+                <div class="user-banner"></div>
+                <p class="displayname-p" id="displayname-p">User</p>
+                <p class="username-p" id="username-p">@user</p>
+                <button class="edit-profile-b invisible" id="edit-profile-b" onclick="EditProfile()">Edit Profile</button>
+            </div>
+            <div class="posts-or-liked-posts-picker" id="posts-or-liked-posts-picker">
+                <p class="posts-or-liked-posts-picker-p posts-or-liked-posts-picker-p-picked" onclick="ShowPosts()">Posts</p>
+                <p class="posts-or-liked-posts-picker-p" onclick="ShowLikedPosts()">Liked Posts</p>
+                <div class="posts-or-liked-posts-picker-underline" id="posts-or-liked-posts-picker-underline"></div>
+            </div>
+            <div class="posts-showcase-div" id="posts-showcase-div">
+            </div>
+            <div class="could-not-get-posts-div no-posts-div invisible" id="no-posts-div">
+                <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.0//EN'  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'><svg class="error-symbol-svg" height="32" style="overflow:visible;enable-background:new 0 0 32 32" viewBox="0 0 32 32" width="32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g id="Incorrect_Symbol_1_"><g id="Incorrect_Symbol"><circle cx="16" cy="16" id="BG" r="16" style="fill:#4b4b4b;"/><polygon id="Cross_x5F_Symbol" points="24,10.1 21.9,8 16,13.9 10.1,8 8,10.1         13.9,16 8,21.9 10.1,24 16,18.1 21.9,24 24,21.9 18.1,16 " style="fill:#E6E6E6;"/></g></g></g></svg>
+                <p class="error-msg-p">User Has Not Posted Anything!</p>
+            </div>
+            <div class="user-edit-div invisible" id="user-edit-div">
+                <p class="update-displayname-p">Update Display Name</p>
+                <input type="text" class="update-displayname-i" id="update-displayname-i" placeholder="New Display Name" maxlength="20" spellcheck="false">
+                <button class="apply-changes-b" onclick="ApplyChanges()">Apply Changes</button>
+            </div>
+
+            <div class="menu-bar">
+                <a class="menu-bar-element" href="../Home/Home.html">Home</a>
+                <p class="menu-bar-element">Profile</p>
+                <p class="menu-bar-element add-post-b" onclick=AddPost()>+</p>
+                <p class="menu-bar-element">Profile</p>
+                <p class="menu-bar-element menu-bar-element-current-page" id="menu-bar-element-current-page">Profile</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let displayname = '';
+    let usrname = '';
+
+    //Get Display Name
+try {
+    const username = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("name="))
+        ?.split("=")[1].toLowerCase();
+    if(username != undefined && username.length > 0 && !window.location.href.includes('?user=')) {
+        document.title = `Queue | @${decodeURIComponent(username)}`;
+        document.getElementById('edit-profile-b').classList.remove('invisible');
+        document.getElementById('username-p').textContent= `@${decodeURIComponent(username)}`;
+
+        usrname = decodeURIComponent(username);
+
+        let request = new XMLHttpRequest();
+        request.open("GET", `http://127.0.0.1:48922/get-profile?username=${username}`);
+        request.send();
+        request.onload = () => {
+            document.getElementById('displayname-p').textContent = decodeURIComponent(request.response);
+            displayname = decodeURIComponent(request.response);
+        }
+
+        request.onerror = () => {
+            document.getElementById('displayname-p').textContent = 'There Was An Error Recieving The Username!';
+        }
+
+    } else if(window.location.href.includes('?user=')) {
+        document.title = `Queue | @${decodeURIComponent(window.location.href.split('?user=')[1])}`;
+        document.getElementById('username-p').textContent= `@${decodeURIComponent(window.location.href.split('?user=')[1].toLowerCase())}`;
+        usrname = decodeURIComponent(window.location.href.split('?user=')[1]);
+        document.getElementById('menu-bar-element-current-page').outerHTML = `<a class="menu-bar-element" href="./Profile.html">Profile</a>`;
+
+        let request = new XMLHttpRequest();
+        request.open("GET", `http://127.0.0.1:48922/get-profile?username=${window.location.href.split('?user=')[1]}`);
+        request.send();
+        request.onload = () => {
+            document.getElementById('displayname-p').textContent = decodeURIComponent(request.response);
+            displayname = decodeURIComponent(request.response);
+        }
+
+        request.onerror = () => {
+            document.getElementById('displayname-p').textContent = 'There Was An Error Recieving The Username!';
+        }
+    } else {
+        window.location = '../LoginSignup/Signup/Signup.html';
+    }
+    
+} catch (e) {
+    window.location = '../LoginSignup/Signup/Signup.html';
+}
+
+    //Get Posts From User
+
+    try {
+        let username = '';
+        if(window.location.href.includes('?user=')) {
+            username = window.location.href.split('?user=')[1];
+        } else {
+            username = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("name="))
+            ?.split("=")[1].toLowerCase();
+        }
+        
+        //Get All The Post Id's from the user
+        let posts = [];
+        let request = new XMLHttpRequest();
+        request.open("GET", `http://127.0.0.1:48922/get-posts-from-user?user=${username}`);
+        request.send();
+        request.onload = () => {
+            if(request.response != "No User!" && request.response != 'No User With That Name Found!' && request.response.length > 0) {
+                posts = request.response.split(',');
+                if(posts[0] == '') posts = posts.slice(1);
+                posts.reverse();
+                if(posts.length > 0) {
+                    GetPostFromId(posts, displayname, usrname);
+                } else {
+                    document.getElementById('no-posts-div').classList.remove('invisible');
+                }
+            } else if(request.response.length <= 0) {
+                document.getElementById('no-posts-div').classList.remove('invisible');
+            } else {
+            }
+        }
+    } catch(e) {}
+</script>

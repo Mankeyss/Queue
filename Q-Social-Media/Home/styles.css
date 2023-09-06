@@ -41,6 +41,7 @@
     margin-left: 15px;
     margin-right: 15px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .add-post-b {
@@ -82,7 +83,7 @@
 
 .post {
     background-color: black;
-    height: 400px;
+    height: 450px;
     width: 380px;
     margin-bottom: 0px;
     margin-top: 50px;
@@ -90,12 +91,15 @@
     justify-content: center;
     display: flex;
     color: white;
+    z-index: 5;
+    transition: height 0.2s ease;
 }
 
 .post-caption {
     position: absolute;
     width: 300px;
-    height: 50px;
+    min-height: 25px;
+    max-height: 50px;
     text-align: center;
     font-size: 20px;
     margin-top: 50px;
@@ -120,7 +124,7 @@
     cursor: pointer;
     height: 50px;
     line-height: 50px;
-    margin-top: 0px;
+    margin-top: 10px;
 }
 
 .post-pfp-img {
@@ -130,6 +134,92 @@
     border-radius: 50px;
     margin-top: 5px;
     object-fit: scale-down;
+}
+
+.action-placeholder {
+    position: absolute;
+    width: 41vh;
+    height: 50px;
+    margin-top: 385px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.heart-icon {
+    border: solid;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+    line-height: 3.2;
+    margin-left: 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s, font-size 0.2s, line-height 0.2s;
+}
+
+.heart-icon:hover {
+    color: rgb(136, 43, 43);
+}
+
+.heart-icon-clicked {
+    color: red;
+    font-size: 30px;
+    line-height: 1.8;
+}
+
+.heart-icon-clicked:hover {
+    color: red;
+}
+
+.comment-icon {
+    padding: 13px;
+    border: solid;
+    border-radius: 100%;
+    margin-right: 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+}
+
+.comment-icon:hover {
+    color: rgb(0, 174, 255);
+}
+
+.comment-expand {
+    height: 700px;
+}
+
+.like-counter {
+    position: absolute;
+    margin-left: 180px;
+    z-index: -1;
+}
+
+.comments-counter {
+    position: absolute;
+    margin-left: -180px;
+    z-index: -1;
+}
+
+.comments-p-placeholder-div {
+    position: absolute;
+    height: 50px;
+    width: 250px;
+    margin-top: 510px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.comments-p {
+    position: absolute;
+    text-align: center;
+    font-size: 24px;
 }
 
 .invisible {
@@ -161,4 +251,175 @@
     font-size: 24px;
     text-align: center;
     line-height: 0;
+}
+
+.no-more-posts-p {
+    font-size: 24px;
+    width: 350px;
+    margin-top: 200px;
+    position: absolute;
+}
+
+.error-msg-no-posts-p {
+    line-height: 25px;
+}
+
+.loader {
+    position: absolute;
+    border-radius: 25px;
+    top: 0;
+    left: 0;
+    width: 390px;
+    height: 844px;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    background-color: rgb(54, 54, 54);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: opacity 0.25s, visibility 0.75s;
+}
+
+.loader::after {
+    content: "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid gray;
+    border-top-color: rgb(95, 95, 95);
+    border-radius: 100%;
+    animation: loading 0.75s ease infinite;
+}
+
+.loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.display-name-p {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: left;
+    padding-left: 70px;
+    cursor: pointer;
+    height: 50px;
+    line-height: 50px;
+    margin-top: -8px;
+    width: 80%;
+}
+
+.top-menu-bar {
+    background-color: black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50px;
+    z-index: 8;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-menu-bar-pfp-img {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border-radius: 100%;
+    right: 20px;
+    line-height: 0;
+    cursor: pointer;
+}
+
+.top-menu-bar-pfp-img-clicked-div {
+    position: absolute;
+    width: 120px;
+    height: 150px;
+    background-color: rgb(20, 20, 20);
+    right: 0px;
+    top: 50px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    z-index: 10;
+}
+
+.top-menu-bar-pfp-img-clicked-div-cover {
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 25px;
+}
+
+.top-menu-bar-pfp-img-clicked-element {
+    cursor: pointer;
+}
+
+.username-clicked-p {
+    max-width: 100%;
+    overflow: hidden;
+    position: absolute;
+    line-height: 0;
+    color: rgb(175, 175, 175);
+    margin-bottom: 120px;
+    cursor: default;
+    text-overflow: ellipsis;
+    border-bottom: solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-width: 1px;
+    border-color: rgb(50, 50, 50);
+}
+
+.top-menu-bar-logo {
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    display: flex;
+    line-height: 0;
+    left: 20px;
+    object-fit: scale-down;
+    cursor: pointer;
+}
+
+@keyframes loading {
+    from { transform: rotate(0turn); }
+    from { transform: rotate(-1turn); }
+}
+
+@media only screen and (max-width: 500px) {
+    .phone-screen {
+        width: 100%;
+        height: 100%;
+        border-radius: 0px;
+    }
+
+    .menu-bar {
+        border-radius: 0px;
+    }
+
+    .user-name-p {
+        padding-left: 20%;
+    }
+    
+    .loader {
+        border-radius: 0px;
+    }
+
+    .top-menu-bar {
+        border-radius: 0px;
+    }
 }
