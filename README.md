@@ -10,4 +10,4 @@ Installed On Your System, Use The "Ctrl+`" Shortcut to open the terminal on Wind
 * Now Locate The /Q-API/Api.JS File And Click On the 'run' botton. You Should See A Terminal Opening And The Command Prompt Saying "Started Listening To Port 48922, http://127.0.0.1:48922" If All Goes Smoothly.
 * Now Go To The Bottom Right Corner Of Your Screen Where You Will Find A Button Saying 'Go Live', Click On It And You Should See A Tab Popping Up In Your Browser, Then Just Go To "/Q-Social-Media/Home/Home.html" And You're Good To Go!<br>
 
-That's It! You've Completed The Setup So Now You Can Explore However You Would Like!
+That's It! You've Completed The Setup And Now You Can Explore However You Would Like!
