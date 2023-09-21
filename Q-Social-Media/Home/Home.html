@@ -73,23 +73,19 @@
                 if(request.response != "Could't Find Any Available Posts!" && request.response != 'No Posts!' && request.response != 'Post Invalid!' && request.response != "Post Doesn't Exist Anymore!" && request.response != "Reached The End!") {
     
                     //Check Image Validity
-                    var imageUrl = JSON.parse(request.response)[2];
                     try {
-                    fetch(imageUrl)
-                    .then(response => {
-                        if (response.ok) {
                             document.getElementById('posts').innerHTML += `
                             <div class="post" id="post-${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}">
                                 <img class="post-pfp-img" src="./Images/user_icon.jpg">
-                                <p class="display-name-p">${decodeURIComponent(JSON.parse(request.response)[4].toString().trim())}</p>
-                                <p class="user-name-p" onclick=GoToProfile(this.textContent)>@${decodeURIComponent(JSON.parse(request.response)[3])}</p>
-                                <img class="post-img" src="${JSON.parse(request.response)[2]}">
+                                <p class="display-name-p">${decodeURIComponent(JSON.parse(request.response)[3].toString().trim())}</p>
+                                <p class="user-name-p" onclick=GoToProfile(this.textContent)>@${decodeURIComponent(JSON.parse(request.response)[2])}</p>
+                                <img class="post-img" src="http://127.0.0.1:48922/uploads/${JSON.parse(request.response)[0]}.png">
                                 <p class="post-caption">${decodeURIComponent(JSON.parse(request.response)[1].toString().trim())}</p>
                                 <div class="action-placeholder" id="action-post-${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}">
                                     <svg aria-label="" id="action-post-button-${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}" onClick="ClickCommentIcon(this)" class="comment-icon" color="rgb(245, 245, 245)" fill="rgb(245, 245, 245)" height="24" role="img" viewBox="0 0 24 24" width="24"><title></title><path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
                                     <p class="heart-icon ${likedPosts.includes(decodeURIComponent(JSON.parse(request.response)[0].toString().trim())) ? "heart-icon-clicked" : ""}" id="${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}" onclick="ClickHeartIcon(this)">&#10084;</p>
                                     <p class="comments-counter">233</p>
-                                    <p class="like-counter" id="like-${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}">${JSON.parse(request.response)[5]}</p>
+                                    <p class="like-counter" id="like-${decodeURIComponent(JSON.parse(request.response)[0].toString().trim())}">${JSON.parse(request.response)[4]}</p>
                                 </div>
                                 <div class="comments-p-placeholder-div">
                                     <p class="comments-p">Comments Aren't Added Yet!</p>
@@ -98,13 +94,6 @@
                             console.log('recieved!')
                             usedPosts.push(Number(JSON.parse(request.response)[0]));
                             GetPost(num-1);
-                        } else {
-                            console.log('Image URL is invalid');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error validating image URL:', error);
-                    });
                     } catch (e) {}
                     
                 } else if(request.response == 'No Posts!') {

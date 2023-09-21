@@ -4,6 +4,8 @@ const app = express();
 const port = 48922;
 const cors = require('cors');
 const axios = require('axios');
+const multer = require('multer');
+const path = require('path');
 
 app.use(cors());
 
@@ -68,11 +70,10 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/addpost', (req, res) => {
-  if(req.originalUrl.includes('?caption=') && req.originalUrl.includes('?imgurl=')) {
-    var caption = req.originalUrl.split('?caption=').join(';').split('?imgurl=')[0].split(';')[1];
-    var imgurl = req.originalUrl.split('?imgurl=')[1].split(';?user=')[0];
+  if(req.originalUrl.includes('?caption=') && req.originalUrl.includes('?user=')) {
+    var caption = req.originalUrl.split('?caption=')[1].split("?user=")[0].slice(0, -1);
     var user = req.originalUrl.split('?user=')[1];
-    GetImage(imgurl, caption, user);
+    GetImage(caption, user);
 
     //Set Users Property "Posts" to have the new post!
     var postData = fs.readFileSync("./Posts.json").toString();
@@ -101,9 +102,9 @@ app.get('/addpost', (req, res) => {
   res.send('Recieved Information!');
 });
 
-async function GetImage(url, caption, user) {
+async function GetImage(caption, user) {
   try {
-    const response = await axios.get(url, { responseType: 'arraybuffer' });
+    const response = await axios.get("https://www.w3schools.com/w3css/img_lights.jpg", { responseType: 'arraybuffer' });
     const filePath = './Images/'
 
     var id = 0;
@@ -118,20 +119,17 @@ async function GetImage(url, caption, user) {
     const information = {
       "id": id,
       "caption": caption,
-      "imgurl": url,
       "user": user,
       "likes": 0,
   };
 
-    fs.writeFile(filePath+"0.png", response.data, (err) => {
-      if (err) throw err;
       if(fs.readFileSync("./Posts.json", {encoding: 'utf8'}).length > 0) {
         const jsonString = JSON.stringify(information);fs.writeFileSync('./Posts.json', "[" + fs.readFileSync('./Posts.json').toString().slice(1, -1) + "," + jsonString + "]");
       } else {
         const jsonString = JSON.stringify(information);fs.writeFileSync('./Posts.json', "[" + jsonString + "]");
       }
       console.log('Image downloaded successfully!');
-    });
+    
   } catch(e) {}
 }
 
@@ -152,7 +150,6 @@ app.get('/home-get-posts', (req, res) => {
           id = Math.floor(Math.random()*amountOfIds);
         }
         var caption = JSON.parse(fs.readFileSync('./Posts.json', {encoding: 'utf8'}))[id]["caption"];
-        var imgurl = JSON.parse(fs.readFileSync('./Posts.json', {encoding: 'utf8'}))[id]["imgurl"];
         var user = JSON.parse(fs.readFileSync('./Posts.json', {encoding: 'utf8'}))[id]["user"].toLowerCase();
         var likes = JSON.parse(fs.readFileSync('./Posts.json', {encoding: 'utf8'}))[id]["likes"];
 
@@ -166,9 +163,9 @@ app.get('/home-get-posts', (req, res) => {
             }
           }
 
-          res.send([id, caption, imgurl, user, displayname, likes]);
+          res.send([id, caption, user, displayname, likes]);
         } catch (e) {
-          res.send([id, caption, imgurl, user, likes]);
+          res.send([id, caption, user, likes]);
         }
         
       } else {
@@ -253,7 +250,7 @@ app.get('/get-post-from-id', (req, res) => {
 
     for(i = 0; i < jsonData.length; i++) {
       if(jsonData[i]["id"] == id) {
-        res.send([[jsonData[i]["caption"]], [jsonData[i]["imgurl"]]]);
+        res.send([jsonData[i]["id"], [jsonData[i]["caption"]]]);
         res.end();
         return;
       }
@@ -374,3 +371,67 @@ AddToDataUsers = function(user) {
     const jsonString = JSON.stringify(user);fs.writeFileSync('./Users.json', "[" + fs.readFileSync('./Users.json').toString().slice(1, -1) + jsonString + "]");
   }
 }
+
+//Upload Image
+
+// Configure multer for image uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${GetImageId()}.png`);
+  },
+});
+
+GetImageId = function() {
+  var postData = fs.readFileSync("./Posts.json").toString();
+  var id = 0;
+  try {
+    if(postData.length >= 0) {
+      id = JSON.parse(fs.readFileSync('./Posts.json', {encoding: 'utf8'})).length;
+    } else {
+      id = 0;
+    }
+  } catch (e) {
+    id = 0;
+  }
+  return id;
+}
+
+const upload = multer({ storage });
+
+// Serve uploaded images statically
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Handle image upload POST request
+app.post('/upload', upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+  }
+
+  // Here, you can save the image information to your database.
+  // Example: Store the image path in your database.
+
+  res.status(200).send('Image uploaded successfully.');
+});
+
+// Handle image download GET request
+app.get('/download/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const filePath = path.join(__dirname, 'uploads', filename);
+
+  // Check if the file exists
+  if (!fs.existsSync(filePath)) {
+    console.error('File not found:', filePath);
+    return res.status(404).send('File not found.');
+  }
+
+  // Send the image file for download
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      console.error('Error sending file:', err);
+      res.status(500).send('Internal server error.');
+    }
+  });
+});

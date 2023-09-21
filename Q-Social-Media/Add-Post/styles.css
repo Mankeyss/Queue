@@ -123,7 +123,7 @@
     position: absolute;
     height: 250px;
     width: 250px;
-    z-index: 5;
+    z-index: 20;
     background-color: black;
     border-radius: 15px;
     display: flex;
@@ -299,10 +299,11 @@
 
 .post-b {
     position: absolute;
-    margin-top: 160px;
+    margin-top: 65px;
     margin-right: 300px;
     width: 80px;
     height: 30px;
+    left: 5px;
     border: none;
     border-radius: 5px;
     background-color: rgb(0, 143, 199);
@@ -362,14 +363,16 @@
     width: 0px;
     position: absolute;
     border-radius: 100px;
-    z-index: 11;
-    margin: 0;
+    z-index: 13;
     padding: 0;
+    margin: 0;
     margin-right: 125px;
     padding-left: 50px;
     padding-right: 50px;
     padding-bottom: 50px;
     padding-top: 50px;
+    margin-top: -50px;
+    margin-left: -112px;
     font-size: 0px;
     cursor: pointer;
 }
@@ -447,6 +450,10 @@
     width: 70px;
     position: absolute;
     margin-bottom: 70px;
+}
+
+.input-form {
+    z-index: 15;
 }
 
 @media only screen and (max-width: 500px) {

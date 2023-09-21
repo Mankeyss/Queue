@@ -86,9 +86,9 @@ GetPostFromId = function(posts, displayname, username) {
                     <img class="post-pfp-img" src="../Home/Images/user_icon.jpg">
                     <p class="display-name-p">${document.getElementById('displayname-p').textContent}</p>
                     <p class="user-name-p">@${username}</p>
-                    <img class="post-img" src="${JSON.parse(request.response)[1]}">
-                    <p class="post-caption">${decodeURIComponent(JSON.parse(request.response)[0])}</p>
-                </div>`
+                    <img class="post-img" src="http://127.0.0.1:48922/uploads/${JSON.parse(request.response)[0]}.png">
+                        <p class="post-caption">${decodeURIComponent(JSON.parse(request.response)[1].toString().trim())}</p>
+                    </div>`
             }
         }
 

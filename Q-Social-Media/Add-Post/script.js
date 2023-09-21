@@ -30,6 +30,8 @@ UploadFile = function() {
 NextPart = function() {
     document.getElementById('part1').classList.add('invisible');
     document.getElementById('part2').classList.remove('invisible');
+    document.getElementById('pick-file').classList.add('invisible');
+    document.getElementById('post-b').classList.remove('invisible');
 }
 
 UpdateLetters = function() {
@@ -42,7 +44,27 @@ UpdateLetters = function() {
 }
 
 async function Post() {
-    if(document.getElementById('caption-i').value.toString().trim().length >= 5 && document.getElementById('img-url-i').value.toString().trim().length > 0) {
+
+    //Caption
+
+    if(document.getElementById('caption-i').value.toString().trim().length >= 5) {
+            //Image
+        const formData = new FormData();
+        const fileInput = document.getElementById('pick-file');
+        const file = fileInput.files[0];
+        formData.append('image', file);
+
+        await fetch('http://127.0.0.1:48922/upload', {
+            method: 'POST',
+            body: formData,
+        })
+            .then((response) => response.text())
+            .then((message) => {
+                console.log(message);
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
         //Post
         //Image
         //&
@@ -56,20 +78,18 @@ async function Post() {
         ?.split("=")[1];
 
         let request = new XMLHttpRequest();
-        request.open("GET", `http://127.0.0.1:48922/addpost?caption=${document.getElementById('caption-i').value.toString().trim()};?imgurl=${document.getElementById('img-url-i').value};?user=${username}`);
+        request.open("GET", `http://127.0.0.1:48922/addpost?caption=${document.getElementById('caption-i').value.toString().trim()};?user=${username}`);
         request.send();
         request.onload = () => {
             console.log(request.response);
             window.location = '.././Home/Home.html'
             window.reload();
         }
-    } else if(document.getElementById('img-url-i').value.toString().trim().length <= 0) {
-        document.getElementById('error-msg-p2').classList.add('show-error-msg');
-        document.getElementById('error-msg-p2').textContent = 'No Image Url Given!';
     } else if(document.getElementById('caption-i').value.toString().trim().length < 5) {
         document.getElementById('error-msg-p2').classList.add('show-error-msg');
         document.getElementById('error-msg-p2').textContent = 'Characters In Caption Must Be At Least 5!';
     };
+    return false;
 }
 
 RemoveImg = function() {
